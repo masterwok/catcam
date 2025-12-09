@@ -1,5 +1,3 @@
-console.log("Started...");
-
 let inFlight = false;
 
 document.addEventListener("keydown", async (event) => {
