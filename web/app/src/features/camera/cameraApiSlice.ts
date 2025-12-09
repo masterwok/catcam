@@ -1,10 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react"
 import { APP_CONFIG } from "../../app/configSlice"
 
-// type MoveRequest = {
-//     direction: Direction
-// }
-
 export enum CameraDirection {
     UP = "up",
     DOWN = "down",
@@ -23,7 +19,7 @@ export const cameraApiSlice = createApi({
             query: (direction) => ({
                 url: APP_CONFIG.movePath,
                 method: "POST",
-                body: JSON.stringify(direction),
+                body: { direction },
             }),
         }),
     }),

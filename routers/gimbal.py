@@ -1,4 +1,5 @@
 from fastapi import APIRouter, Body
+from pydantic import BaseModel
 from gimbal_controller import GimbalController
 from enum import Enum
 
@@ -10,6 +11,9 @@ class Direction(Enum):
     DOWN = 'down'
     LEFT = 'left'
     RIGHT = 'right'
+
+class MoveRequest(BaseModel):
+    direction: Direction
 
 @router.post("/move")
 async def move(direction: Direction = Body(...)):
