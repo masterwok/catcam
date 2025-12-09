@@ -1,0 +1,25 @@
+<html>
+      <head>
+        <style>
+          html, body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background: black;
+            height: 100%;
+            width: 100%;
+          }
+          img {
+            display: block;
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;  /* or 'contain' if you prefer letterboxing */
+          }
+        </style>
+      </head>
+      <body>
+        <img src="/api/stream">
+	<script type="module" src="/static/js/app.js"></script>
+      </body>
+</html>
+
