@@ -1,6 +1,5 @@
-from fastapi import APIRouter, Depends, FastAPI, HTTPException, status, Response
-from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
-from pydantic import BaseModel
+from fastapi import APIRouter, Depends, HTTPException, status, Response
+from fastapi.security import OAuth2PasswordRequestForm
 from typing import Annotated
 
 from auth import authenticate_user, create_access_token, Token
