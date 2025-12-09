@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
-from routers import gimbal, camera, auth
+from routers import auth_router, camera_router, gimbal_router
 from pathlib import Path
 
 app = FastAPI()
@@ -23,6 +23,6 @@ app.mount("/static", StaticFiles(directory="web", html=True), name="web")
 async def root():
     return FileResponse(Path("web/index.html"))
 
-app.include_router(auth.router)
-app.include_router(gimbal.router)
-app.include_router(camera.router)
+app.include_router(auth_router.router)
+app.include_router(gimbal_router.router)
+app.include_router(camera_router.router)
