@@ -16,6 +16,7 @@ export const authApiSlice = createApi({
   reducerPath: "authApi",
   baseQuery: fetchBaseQuery({
     baseUrl: APP_CONFIG.baseUrl,
+    credentials: "include"
   }),
   endpoints: build => ({
     login: build.mutation<LoginResponse, LoginRequest>({

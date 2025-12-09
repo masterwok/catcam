@@ -24,7 +24,7 @@ async def login(
         value=access_token,
         httponly=True,     # JS cannot read it
         secure=False,      # True in production (HTTPS only)
-        samesite="lax",    # Lax = safe default, Strict is stronger
+        samesite="none",    # Lax = safe default, Strict is stronger
         max_age=3600,      # 1 hour
         path="/"           # send cookie on all routes
     )
