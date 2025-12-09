@@ -8,12 +8,20 @@ from pathlib import Path
 app = FastAPI()
 
 # TODO (JT): REMOVE AFTER FE DEV IS DONE
+#app.add_middleware(
+#    CORSMiddleware,
+#    allow_origins=["*"],        # allow all domains
+#    allow_credentials=True,
+#    allow_methods=["*"],        # allow all HTTP methods
+#    allow_headers=["*"],        # allow all request headers
+#)
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],        # allow all domains
+    allow_origins=["http://192.168.1.2:5173", "http://localhost:5173"],  # exact origin of your SPA
     allow_credentials=True,
-    allow_methods=["*"],        # allow all HTTP methods
-    allow_headers=["*"],        # allow all request headers
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 
