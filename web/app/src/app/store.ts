@@ -4,10 +4,14 @@ import { setupListeners } from "@reduxjs/toolkit/query"
 import { counterSlice } from "../features/counter/counterSlice"
 import { quotesApiSlice } from "../features/quotes/quotesApiSlice"
 import { cameraApiSlice } from "../features/camera/cameraApiSlice"
+import { authApiSlice } from "../features/auth/authApiSlice"
+import authSlice from "../features/auth/authSlice"
 
 // `combineSlices` automatically combines the reducers using
 // their `reducerPath`s, therefore we no longer need to call `combineReducers`.
 const rootReducer = combineSlices(
+  authApiSlice,
+  authSlice,
   counterSlice,
   quotesApiSlice,
   cameraApiSlice,
@@ -26,6 +30,7 @@ export const makeStore = (preloadedState?: Partial<RootState>) => {
     // and other useful features of `rtk-query`.
     middleware: getDefaultMiddleware => {
       return getDefaultMiddleware().concat(
+        authApiSlice.middleware,
         quotesApiSlice.middleware,
         cameraApiSlice.middleware
       )

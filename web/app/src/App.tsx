@@ -1,11 +1,19 @@
 import "./App.css"
+import { useAppSelector } from "./app/hooks"
+import { selectIsAuthenticated } from "./features/auth/authSlice"
+import { Login } from "./features/auth/Login"
 import { Camera } from "./features/camera/Camera"
-// import { Counter } from "./features/counter/Counter"
-// import { Quotes } from "./features/quotes/Quotes"
-// import logo from "./logo.svg"
 
-export const App = () => (
-  <div className="App">
-    <Camera />
-  </div>
-)
+export const App = () => {
+  const isAuthenticated = useAppSelector(selectIsAuthenticated);
+
+  const content = isAuthenticated ? <Camera /> : <Login />
+
+  return (
+    <div className="App">
+      {content}
+    </div>
+  );
+}
+
+
