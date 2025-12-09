@@ -19,14 +19,15 @@ export const authApiSlice = createApi({
   }),
   endpoints: build => ({
     login: build.mutation<LoginResponse, LoginRequest>({
-      query: body => ({
+      query: ({ username, password}) => ({
         url: "/login",
         method: "POST",
-        body,
+        body: new URLSearchParams({
+          username,
+          password,
+        }),
       }),
-
-      // ⭐ THIS IS THE MAGIC:
-      async onQueryStarted(arg, { dispatch, queryFulfilled }) {
+      async onQueryStarted(_, { dispatch, queryFulfilled }) {
         try {
           const { data } = await queryFulfilled
           dispatch(setToken(data.access_token))

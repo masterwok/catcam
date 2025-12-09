@@ -1,5 +1,6 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react"
+import { createApi } from "@reduxjs/toolkit/query/react"
 import { APP_CONFIG } from "../../app/configSlice"
+import { baseQueryWithAuth } from "../auth/authApiBase"
 
 export enum CameraDirection {
     UP = "up",
@@ -10,9 +11,7 @@ export enum CameraDirection {
 
 export const cameraApiSlice = createApi({
     reducerPath: "cameraApi",
-    baseQuery: fetchBaseQuery({
-        baseUrl: APP_CONFIG.baseUrl,
-    }),
+    baseQuery: baseQueryWithAuth,
     tagTypes: ["Camera"],
     endpoints: build => ({
         move: build.mutation<unknown, CameraDirection>({
