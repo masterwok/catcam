@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends
 from pydantic import BaseModel
-from auth import get_current_user
+from auth import oauth2_scheme
 from gimbal_controller import GimbalController
 from enum import Enum
 
@@ -18,7 +18,7 @@ class MoveRequest(BaseModel):
     direction: Direction
 
 @router.post("/move")
-async def move(req: MoveRequest, user: str = Depends(get_current_user)):
+async def move(req: MoveRequest, user: str = Depends(oauth2_scheme)):
     match req.direction:
         case Direction.UP:
             gimbal.move_up()
