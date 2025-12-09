@@ -16,8 +16,8 @@ class MoveRequest(BaseModel):
     direction: Direction
 
 @router.post("/move")
-async def move(direction: Direction = Body(...)):
-    match direction:
+async def move(req: MoveRequest):
+    match req.direction:
         case Direction.UP:
             gimbal.move_up()
         case Direction.DOWN:
@@ -29,4 +29,4 @@ async def move(direction: Direction = Body(...)):
         case _:
             raise ValueError("Invalid direction")
 
-    return {"direction": direction.value}
+    return None
