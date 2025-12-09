@@ -1,18 +1,14 @@
-from fastapi import APIRouter, HTTPException, status
+from fastapi import APIRouter, Depends, FastAPI, HTTPException, status
+from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from pydantic import BaseModel
+from typing import Annotated
 
 from auth import authenticate_user, create_access_token, Token
 
 router = APIRouter(prefix="/api", tags=["auth"])
 
-
-class LoginRequest(BaseModel):
-    username: str
-    password: str
-
-
 @router.post("/login", response_model=Token)
-async def login(req: LoginRequest):
+async def login(req: Annotated[OAuth2PasswordRequestForm, Depends()]):
     if not authenticate_user(req.username, req.password):
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
@@ -20,4 +16,5 @@ async def login(req: LoginRequest):
         )
 
     access_token = create_access_token({"sub": req.username})
+
     return Token(access_token=access_token)
