@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Body
+from fastapi import APIRouter, Depends
 from pydantic import BaseModel
 from auth import get_current_user
 from gimbal_controller import GimbalController
