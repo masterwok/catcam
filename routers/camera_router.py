@@ -1,6 +1,8 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
 from fastapi.responses import StreamingResponse
 from picamera2 import Picamera2
+from typing import Annotated
+from auth import oauth2_scheme
 import io
 import time
 
@@ -25,7 +27,7 @@ def mjpeg_stream():
         time.sleep(0.05)
 
 @router.get("/stream")
-def stream():
+def stream(_token: Annotated[str, Depends(oauth2_scheme)]):
     return StreamingResponse(
         mjpeg_stream(),
         media_type="multipart/x-mixed-replace; boundary=frame"
