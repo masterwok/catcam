@@ -1,6 +1,7 @@
 import { useState, type FormEvent } from "react";
 import { useLoginMutation } from "./authApiSlice";
 import './Login.css';
+import catMascot from './mascot.png'; 
 
 export const Login = () => {
   const [username, setUsername] = useState("")
@@ -16,7 +17,9 @@ export const Login = () => {
     <div className="login-page">
       <form className="login-card" onSubmit={onSubmit}>
 
-        <h2>Ostara Cam Login</h2>
+        <img src={catMascot} alt="cat mascot" className="mascot" />
+
+        <h2 className="title">Ostara Cam</h2>
 
         <input
           className="input"
@@ -34,7 +37,7 @@ export const Login = () => {
         />
 
         <button className="login-button" type="submit" disabled={isLoading}>
-          LOGIN
+          Login
         </button>
 
         {isError && <div className="error">Login failed</div>}

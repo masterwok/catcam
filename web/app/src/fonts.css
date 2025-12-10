@@ -1,0 +1,13 @@
+@font-face {
+  font-family: "MochiBoom";
+  src: url("/fonts/MochiBoomDemoRegular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "MgfPinlock";
+  src: url("/fonts/MgfPinlock.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+}
