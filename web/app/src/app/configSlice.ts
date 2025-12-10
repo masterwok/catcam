@@ -1,7 +1,5 @@
-const baseUrl = "https://192.168.1.86:8000/api";
-
 export const APP_CONFIG = {
-    baseUrl: baseUrl,
+    baseUrl: '/api',
     streamPath: `/stream`,
     movePath: `/move`,
 
