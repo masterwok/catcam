@@ -1,8 +1,6 @@
 import type { Action, ThunkAction } from "@reduxjs/toolkit"
 import { combineSlices, configureStore } from "@reduxjs/toolkit"
 import { setupListeners } from "@reduxjs/toolkit/query"
-import { counterSlice } from "../features/counter/counterSlice"
-import { quotesApiSlice } from "../features/quotes/quotesApiSlice"
 import { cameraApiSlice } from "../features/camera/cameraApiSlice"
 import { authApiSlice } from "../features/auth/authApiSlice"
 import authSlice from "../features/auth/authSlice"
@@ -12,8 +10,6 @@ import authSlice from "../features/auth/authSlice"
 const rootReducer = combineSlices(
   authApiSlice,
   authSlice,
-  counterSlice,
-  quotesApiSlice,
   cameraApiSlice,
 )
 
@@ -31,7 +27,6 @@ export const makeStore = (preloadedState?: Partial<RootState>) => {
     middleware: getDefaultMiddleware => {
       return getDefaultMiddleware().concat(
         authApiSlice.middleware,
-        quotesApiSlice.middleware,
         cameraApiSlice.middleware
       )
     },
