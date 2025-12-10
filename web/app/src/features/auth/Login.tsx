@@ -1,5 +1,6 @@
 import { useState, type FormEvent } from "react";
 import { useLoginMutation } from "./authApiSlice";
+import './Login.css';
 
 export const Login = () => {
   const [username, setUsername] = useState("")
@@ -8,29 +9,36 @@ export const Login = () => {
 
   const onSubmit = (e: FormEvent) => {
     e.preventDefault()
-    login({ username, password })   // token is stored automatically
+    login({ username, password })
   }
 
   return (
-    <form onSubmit={onSubmit}>
-      <h2>Login</h2>
+    <div className="login-page">
+      <form className="login-card" onSubmit={onSubmit}>
 
-      <input
-        value={username}
-        onChange={e => setUsername(e.target.value)}
-      />
+        <h2>Ostara Cam Login</h2>
 
-      <input
-        type="password"
-        value={password}
-        onChange={e => setPassword(e.target.value)}
-      />
+        <input
+          className="input"
+          placeholder="username"
+          value={username}
+          onChange={e => setUsername(e.target.value)}
+        />
 
-      <button type="submit" disabled={isLoading}>
-        Login
-      </button>
+        <input
+          className="input"
+          type="password"
+          placeholder="password"
+          value={password}
+          onChange={e => setPassword(e.target.value)}
+        />
 
-      {isError && <div>Login failed</div>}
-    </form>
+        <button className="login-button" type="submit" disabled={isLoading}>
+          LOGIN
+        </button>
+
+        {isError && <div className="error">Login failed</div>}
+      </form>
+    </div>
   )
 }
