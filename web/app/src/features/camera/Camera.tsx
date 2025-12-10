@@ -1,9 +1,8 @@
 import { useEffect, type JSX } from "react";
-import styles from "./Camera.module.css"
+import styles from "./Camera.module.css";
 import { cameraKeyboardListener } from "./keyboardListenerEffect";
 import { APP_CONFIG } from "../../app/configSlice";
 import { useMoveMutation, CameraDirection } from "./cameraApiSlice";
-
 
 export const Camera = (): JSX.Element => {
     const [moveCamera] = useMoveMutation();
@@ -27,11 +26,43 @@ export const Camera = (): JSX.Element => {
         });
 
         return unsubscribe;
-    }, []);
+    }, [moveCamera]);
 
     return (
-        <div>
-            <img className={styles.stream} src={APP_CONFIG.streamUrl} />
+        <div className={styles.cameraContainer}>
+            <img
+                className={styles.stream}
+                src={APP_CONFIG.streamUrl}
+                alt="Cat camera live stream"
+            />
+
+            <button
+                type="button"
+                className={`${styles.tapZone} ${styles.top}`}
+                aria-label="Pan camera up"
+                onClick={() => moveCamera(CameraDirection.UP)}
+            />
+
+            <button
+                type="button"
+                className={`${styles.tapZone} ${styles.bottom}`}
+                aria-label="Pan camera down"
+                onClick={() => moveCamera(CameraDirection.DOWN)}
+            />
+
+            <button
+                type="button"
+                className={`${styles.tapZone} ${styles.left}`}
+                aria-label="Pan camera left"
+                onClick={() => moveCamera(CameraDirection.LEFT)}
+            />
+
+            <button
+                type="button"
+                className={`${styles.tapZone} ${styles.right}`}
+                aria-label="Pan camera right"
+                onClick={() => moveCamera(CameraDirection.RIGHT)}
+            />
         </div>
     );
-}
+};
