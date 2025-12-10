@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends
 from fastapi.responses import StreamingResponse
 from picamera2 import Picamera2
 from typing import Annotated
-from auth import get_current_user
+from auth import get_current_user_cookie
 import io
 import time
 
@@ -27,7 +27,7 @@ def mjpeg_stream():
         time.sleep(0.05)
 
 @router.get("/stream")
-def stream(_token: Annotated[str, Depends(get_current_user)]):
+def stream(_token: Annotated[str, Depends(get_current_user_cookie)]):
     return StreamingResponse(
         mjpeg_stream(),
         media_type="multipart/x-mixed-replace; boundary=frame"

@@ -49,7 +49,7 @@ def create_access_token(data: dict, expires_delta: Optional[timedelta] = None) -
     to_encode.update({"exp": expire})
     return jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
 
-async def get_current_user(
+async def get_current_user_jwt(
     header_token: str | None = Depends(oauth2_scheme),
     cookie_token: str | None = Cookie(default=None, alias="access_token"),
 ):
@@ -62,6 +62,24 @@ async def get_current_user(
 
     try:
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+        return payload["sub"]
+    except JWTError:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Invalid or expired token",
+        )
+
+async def get_current_user_cookie(
+    cookie_token: str | None = Cookie(default=None, alias="access_token"),
+):
+    if not cookie_token:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Not authenticated",
+        )
+
+    try:
+        payload = jwt.decode(cookie_token, SECRET_KEY, algorithms=[ALGORITHM])
         return payload["sub"]
     except JWTError:
         raise HTTPException(
