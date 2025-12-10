@@ -7,19 +7,16 @@ from fastapi.security import OAuth2PasswordBearer
 from jose import JWTError, jwt
 from passlib.context import CryptContext
 from pydantic import BaseModel
+import asyncio
 
 # In real code, put this in config / env vars
 SECRET_KEY = "CHANGE_THIS_TO_A_LONG_RANDOM_SECRET"
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 60
-
-# very basic, single-user "DB"
-FAKE_USERNAME = "admin"
-# hash for password "admin" (generated with passlib)
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
-FAKE_PASSWORD_HASH = pwd_context.hash("admin")
+CREDS_FILE_PATH = "creds.txt"
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/api/login")
+pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 
 class Token(BaseModel):
@@ -36,12 +33,27 @@ def verify_password(plain_password: str, hashed_password: str) -> bool:
 
 
 def authenticate_user(username: str, password: str) -> bool:
-    if username != FAKE_USERNAME:
+    valid_user, valid_password_hash = read_credentials(CREDS_FILE_PATH)
+
+    if username != valid_user:
         return False
-    if not verify_password(password, FAKE_PASSWORD_HASH):
+    if not verify_password(password, valid_password_hash):
         return False
     return True
 
+def read_credentials(path: str) -> tuple[str, str]:
+    """
+    Reads `username:password_hash` from the file.
+    Returns (username, password_hash).
+    """
+    with open(path, "r", encoding="utf-8") as f:
+        data = f.read().strip()
+
+    if ":" not in data:
+        raise ValueError("Invalid format in credentials file")
+
+    username, password_hash = data.split(":", 1)
+    return username, password_hash
 
 def create_access_token(data: dict, expires_delta: Optional[timedelta] = None) -> str:
     to_encode = data.copy()
