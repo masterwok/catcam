@@ -7,6 +7,7 @@ from pathlib import Path
 app = FastAPI()
 
 app.mount("/assets", StaticFiles(directory="web/app/dist/assets", html=True), name="assets")
+app.mount("/fonts", StaticFiles(directory="web/app/dist/fonts", html=True), name="fonts")
 
 @app.get("/")
 async def root():
