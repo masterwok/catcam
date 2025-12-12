@@ -1,0 +1,149 @@
+.setup-page {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg,
+            #ffb3d6 0%,
+            #f3c3ff 20%,
+            #c9d9ff 40%,
+            #c7ffe4 60%,
+            #fff7c2 80%,
+            #ffd4c7 100%);
+
+    background-size: 300% 300%;
+    animation: pastelFlow 16s ease infinite;
+
+    padding: 0;
+}
+
+@keyframes pastelFlow {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* setup card */
+
+.setup-card {
+    background: rgba(255, 245, 250, 0.88);
+    width: 380px;
+    padding: 45px 35px 35px;
+    border-radius: 22px;
+    margin: 100px 20px 0px 20px;
+    box-shadow:
+        0 18px 45px rgba(0, 0, 0, 0.18),
+        0 0 40px rgba(255, 200, 220, 0.35);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+
+.mascot {
+    width: 200px;
+    position: absolute;
+    top: -100px;
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.22));
+}
+
+/* Title */
+
+.title {
+    margin-top: 40px;
+    margin-bottom: 20px;
+
+    font-family: "MgfPinlock", system-ui, sans-serif;
+    font-weight: 400;
+    font-size: 60px;
+    line-height: 1.1;
+    letter-spacing: 0;
+
+    color: #5b4a75;
+    text-align: center;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.12);
+}
+
+/* Inputs */
+
+.input {
+    width: 100%;
+    padding: 14px;
+    margin-bottom: 16px;
+
+    font-family: "MochiBoom", system-ui, sans-serif;
+    font-weight: 400;
+    font-size: 20px;
+
+    border-radius: 10px;
+    border: 3px solid #ddaac4;
+    background: #ffeef7;
+    color: #555;
+
+    transition: 0.25s ease;
+}
+
+.input::placeholder {
+    color: #c79db7;
+    font-weight: 400;
+}
+
+.input:focus {
+    outline: none;
+    border: 3px solid #ff9ac6;
+    background: #ffe3f0;
+}
+
+/* setup button */
+
+.setup-button {
+    width: calc(100% + 32px);
+    padding-top: 16px;
+    padding-bottom: 12px;
+
+    font-family: "MochiBoom", system-ui, sans-serif;
+    font-weight: 400;
+    font-size: 34px;
+    text-transform: none;
+
+    background: linear-gradient(135deg, #ff93c6, #ff6e9f);
+    border: none;
+    border-radius: 12px;
+    color: #ffffff;
+
+    cursor: pointer;
+    transition: transform 0.15s ease, filter 0.15s ease, box-shadow 0.15s ease;
+    box-shadow: 0 6px 14px rgba(255, 120, 165, 0.45);
+}
+
+.setup-button:hover:not(:disabled) {
+    transform: translateY(-2px);
+    filter: brightness(1.08);
+    box-shadow: 0 8px 18px rgba(255, 120, 165, 0.55);
+}
+
+.setup-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* Error text */
+
+.error {
+    margin-top: 12px;
+    color: #ff4f79;
+    font-weight: 600;
+    font-size: 14px;
+}

@@ -4,6 +4,7 @@ import { setupListeners } from "@reduxjs/toolkit/query"
 import { cameraApiSlice } from "../features/camera/cameraApiSlice"
 import { authApiSlice } from "../features/auth/authApiSlice"
 import authSlice from "../features/auth/authSlice"
+import setupSlice from "../features/setup/setupSlice"
 
 // `combineSlices` automatically combines the reducers using
 // their `reducerPath`s, therefore we no longer need to call `combineReducers`.
@@ -11,6 +12,7 @@ const rootReducer = combineSlices(
   authApiSlice,
   authSlice,
   cameraApiSlice,
+  setupSlice,
 )
 
 
@@ -27,7 +29,7 @@ export const makeStore = (preloadedState?: Partial<RootState>) => {
     middleware: getDefaultMiddleware => {
       return getDefaultMiddleware().concat(
         authApiSlice.middleware,
-        cameraApiSlice.middleware
+        cameraApiSlice.middleware,
       )
     },
     preloadedState,

@@ -1,7 +1,7 @@
 import { useState, type FormEvent } from "react";
 import { useLoginMutation } from "./authApiSlice";
 import './Login.css';
-import catMascot from './mascot.png'; 
+import catMascot from '../assets/mascot.png'; 
 
 export const Login = () => {
   const [username, setUsername] = useState("")
