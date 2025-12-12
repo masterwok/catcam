@@ -1,16 +1,23 @@
-# auth.py
 from datetime import datetime, timedelta
 from typing import Optional
-
 from fastapi import Depends, HTTPException, status, Cookie
 from fastapi.security import OAuth2PasswordBearer
 from jose import JWTError, jwt
 from passlib.context import CryptContext
 from pydantic import BaseModel
 import asyncio
+import logging
 
-# In real code, put this in config / env vars
-SECRET_KEY = "CHANGE_THIS_TO_A_LONG_RANDOM_SECRET"
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+    datefmt="%Y-%m-%d %H:%M:%S",
+
+)
+
+logger = logging.getLogger(__name__)
+
+SECRET_KEY = "this_is_just_a_simple_project_could_use_env_but_meh"
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 60
 CREDS_FILE_PATH = "creds.txt"

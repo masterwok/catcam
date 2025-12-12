@@ -5,3 +5,5 @@ python-jose[cryptography]==3.3.0
 bcrypt==3.2.2
 passlib[bcrypt]
 python-multipart
+gpiozero
+RPi.GPIO
