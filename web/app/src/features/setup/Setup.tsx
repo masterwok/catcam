@@ -1,25 +1,20 @@
 
-import { useState, type FormEvent } from "react";
-// import { useLoginMutation } from "./authApiSlice";
+import { type FormEvent } from "react";
+import { useSetupMutation } from "./setupApiSlice";
 import './Setup.css';
 import catMascot from '../assets/mascot.png';
-import setupSlice, { setUsername, setPassword, setNetworkName, setNetworkPassword } from "./setupSlice";
+import { setUsername, setPassword, setNetworkName, setNetworkPassword } from "./setupSlice";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 
 export const Setup = () => {
-  //   const [login, { isLoading, isError }] = useLoginMutation()
+  const [setup, { isLoading, isError }] = useSetupMutation();
   const dispatch = useAppDispatch();
-
-  const {
-    username,
-    password,
-    networkName,
-    networkPassword,
-  } = useAppSelector(state => state.setup)
+  const state = useAppSelector(state => state.setup)
 
   const onSubmit = (e: FormEvent) => {
     e.preventDefault()
-    // login({ username, password })
+    setup(state)
+
   }
 
   return (
@@ -33,21 +28,21 @@ export const Setup = () => {
         <input
           className="input"
           placeholder="network name"
-          value={networkName}
+          value={state.networkName}
           onChange={e => dispatch(setNetworkName(e.target.value))}
         />
 
         <input
           className="input"
           placeholder="network password"
-          value={networkPassword}
+          value={state.networkPassword}
           onChange={e => dispatch(setNetworkPassword(e.target.value))}
         />
 
         <input
           className="input"
           placeholder="username"
-          value={username}
+          value={state.username}
           onChange={e => dispatch(setUsername(e.target.value))}
         />
 
@@ -55,15 +50,15 @@ export const Setup = () => {
           className="input"
           type="password"
           placeholder="password"
-          value={password}
+          value={state.password}
           onChange={e => dispatch(setPassword(e.target.value))}
         />
 
-        <button className="setup-button" type="submit" disabled={false}>
+        <button className="setup-button" type="submit" disabled={isLoading}>
           Submit
         </button>
 
-        {/* {isError && <div className="error">Login failed</div>} */}
+        {isError && <div className="error">Setup failed</div>}
       </form>
     </div>
   )
