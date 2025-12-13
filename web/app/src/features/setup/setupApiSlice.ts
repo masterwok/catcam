@@ -13,6 +13,10 @@ type SetupResponse = {
   token_type: string
 }
 
+type SetupStatusResponse = {
+  setupComplete: boolean
+}
+
 export const setupApiSlice = createApi({
   reducerPath: "setupApi",
   baseQuery: fetchBaseQuery({
@@ -26,7 +30,16 @@ export const setupApiSlice = createApi({
         body: request
       })
     }),
+    getSetupStatus: build.query<SetupStatusResponse, void>({
+      query: () => ({
+        url: "/status",
+        method: "GET",
+      }),
+    }),
   }),
 })
 
-export const { useSetupMutation } = setupApiSlice
+export const { 
+  useSetupMutation,
+  useGetSetupStatusQuery
+} = setupApiSlice
