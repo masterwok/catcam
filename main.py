@@ -3,6 +3,7 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse, PlainTextResponse, RedirectResponse
 from routers import auth_router, camera_router, gimbal_router, setup_router
 from pathlib import Path
+from network import is_ap_mode
 
 app = FastAPI()
 
@@ -12,6 +13,7 @@ app.mount("/fonts", StaticFiles(directory="web/app/dist/fonts", html=True), name
 @app.get("/")
 async def root():
     return FileResponse(Path("web/app/dist/index.html"))
+
 
 app.include_router(auth_router.router)
 app.include_router(camera_router.router)
