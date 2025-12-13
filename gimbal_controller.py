@@ -1,5 +1,6 @@
 import time
 import smbus
+import logging
 
 # ==================== PCA9685 CONSTANTS ====================
 
@@ -19,6 +20,7 @@ SERVO_DOWN_MAX   = 180
 DEFAULT_STEP       = 5     # degrees per move command
 DEFAULT_STEP_DELAY = 50    # ms between movements
 
+logger = logging.getLogger(__name__)
 
 class GimbalController:
     """
@@ -175,11 +177,13 @@ class GimbalController:
     # ==================== PUBLIC DIRECTION METHODS ====================
 
     def move_up(self, step: int | None = None) -> None:
+        logger.info("UP")
         """Tilt up (decrease pitch angle or however you've oriented it)."""
         s = step if step is not None else self.step_deg
         self._increase_degree(self.up_channel, s)
 
     def move_down(self, step: int | None = None) -> None:
+        logger.info("DOWN")
         """Tilt down."""
         s = step if step is not None else self.step_deg
         self._decrease_degree(self.up_channel, s)
