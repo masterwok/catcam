@@ -11,10 +11,26 @@ export const Setup = () => {
   const dispatch = useAppDispatch();
   const state = useAppSelector(state => state.setup)
 
-  const onSubmit = (e: FormEvent) => {
+  const waitFor = async (url: string, timeoutMs = 60_000) => {
+    const start = Date.now()
+    while (Date.now() - start < timeoutMs) {
+      try {
+        await fetch(url, { mode: "no-cors", cache: "no-store" })
+        return true
+      } catch { }
+      await new Promise(r => setTimeout(r, 1500))
+    }
+    return false
+  }
+
+  const onSubmit = async (e: FormEvent) => {
     e.preventDefault()
+
+    // Fire and forget because network will drop out on successful SSID connection
     setup(state)
 
+    await waitFor("https://ostaracam.maneki.dev")
+    window.location.assign("https://ostaracam.maneki.dev")
   }
 
   return (
@@ -58,7 +74,7 @@ export const Setup = () => {
           Submit
         </button>
 
-        {isError && <div className="error">Setup failed</div>}
+        {/* {isError && <div className="error">Setup failed</div>} */}
       </form>
     </div>
   )
