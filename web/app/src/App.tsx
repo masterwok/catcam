@@ -12,7 +12,7 @@ export const App = () => {
 
   if (isLoading) return null
 
-  const content = data?.setupComplete
+  const content = data?.isSetupComplete
     ? (isAuthenticated ? <Camera /> : <Login />)
     : <Setup />
 

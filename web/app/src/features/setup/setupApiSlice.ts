@@ -14,7 +14,7 @@ type SetupResponse = {
 }
 
 type SetupStatusResponse = {
-  setupComplete: boolean
+  isSetupComplete: boolean
 }
 
 export const setupApiSlice = createApi({
@@ -32,7 +32,7 @@ export const setupApiSlice = createApi({
     }),
     getSetupStatus: build.query<SetupStatusResponse, void>({
       query: () => ({
-        url: "/status",
+        url: "/setup",
         method: "GET",
       }),
     }),

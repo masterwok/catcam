@@ -3,9 +3,13 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse, PlainTextResponse, RedirectResponse
 from routers import auth_router, camera_router, gimbal_router, setup_router
 from pathlib import Path
-from network import is_ap_mode
+from network import is_ap_mode, start_captive_portal
+from gpio import init_gpio
+import asyncio
 
 app = FastAPI()
+
+init_gpio(app, asyncio.get_running_loop())
 
 app.mount("/assets", StaticFiles(directory="web/app/dist/assets", html=True), name="assets")
 app.mount("/fonts", StaticFiles(directory="web/app/dist/fonts", html=True), name="fonts")
@@ -14,13 +18,10 @@ app.mount("/fonts", StaticFiles(directory="web/app/dist/fonts", html=True), name
 async def root():
     return FileResponse(Path("web/app/dist/index.html"))
 
-
 app.include_router(auth_router.router)
 app.include_router(camera_router.router)
 app.include_router(gimbal_router.router)
 app.include_router(setup_router.router)
-
-PORTAL_TEXT="THIS IS A PORTAL"
 
 # -----------------------
 # Primary portal endpoint
