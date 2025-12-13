@@ -3,6 +3,8 @@ from pydantic import BaseModel, Field
 from typing import Annotated
 from auth import oauth2_scheme
 from enum import Enum
+from network import connect_ssid
+from cmd import run_cmd
 
 
 router = APIRouter(prefix="/api", tags=["setup"])
@@ -16,4 +18,6 @@ class SetupRequest(BaseModel):
 
 @router.post("/setup")
 async def setup(req: SetupRequest):
+    await connect_ssid(req.networkName, req.networkPassword)
+
     return None
