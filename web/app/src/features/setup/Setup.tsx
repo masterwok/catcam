@@ -5,6 +5,7 @@ import './Setup.css';
 import catMascot from '../assets/mascot.png';
 import { setUsername, setPassword, setNetworkName, setNetworkPassword } from "./setupSlice";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import { APP_CONFIG } from "../../app/appConfig"
 
 export const Setup = () => {
   const [setup, { isLoading }] = useSetupMutation();
@@ -29,8 +30,8 @@ export const Setup = () => {
     // Fire and forget because network will drop out on successful SSID connection
     setup(state)
 
-    await waitFor("https://ostara.maneki.dev")
-    window.location.assign("https://ostara.maneki.dev")
+    await waitFor(APP_CONFIG.prodUrl)
+    window.location.assign(APP_CONFIG.prodUrl)
   }
 
   return (

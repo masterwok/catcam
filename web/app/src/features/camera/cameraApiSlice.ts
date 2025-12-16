@@ -1,5 +1,5 @@
 import { createApi } from "@reduxjs/toolkit/query/react"
-import { APP_CONFIG } from "../../app/configSlice"
+import { APP_CONFIG } from "../../app/appConfig"
 import { baseQueryWithAuth } from "../auth/authApiBase"
 
 export enum CameraDirection {

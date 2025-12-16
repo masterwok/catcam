@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react"
 import { setToken } from "./authSlice"
-import { APP_CONFIG } from "../../app/configSlice"
+import { APP_CONFIG } from "../../app/appConfig"
 
 type LoginRequest = {
   username: string

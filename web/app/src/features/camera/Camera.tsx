@@ -1,7 +1,7 @@
 import { useEffect, type JSX } from "react";
 import styles from "./Camera.module.css";
 import { cameraKeyboardListener } from "./keyboardListenerEffect";
-import { APP_CONFIG } from "../../app/configSlice";
+import { APP_CONFIG } from "../../app/appConfig";
 import { useMoveMutation, CameraDirection } from "./cameraApiSlice";
 
 export const Camera = (): JSX.Element => {

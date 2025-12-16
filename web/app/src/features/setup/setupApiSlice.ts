@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react"
-import { APP_CONFIG } from "../../app/configSlice"
+import { APP_CONFIG } from "../../app/appConfig"
 
 type SetupRequest = {
   username: string
