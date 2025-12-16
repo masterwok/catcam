@@ -21,8 +21,14 @@ export const cameraApiSlice = createApi({
                 body: { direction },
             }),
         }),
+        feed: build.mutation<void, void>({
+            query: () => ({
+                url: APP_CONFIG.feedPath,
+                method: "POST",
+            }),
+        }),
     }),
 })
 
 // Auto-generated hook
-export const { useMoveMutation } = cameraApiSlice
+export const { useMoveMutation, useFeedMutation } = cameraApiSlice

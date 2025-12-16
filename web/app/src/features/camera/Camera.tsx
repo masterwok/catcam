@@ -2,15 +2,13 @@ import { useEffect, type JSX } from "react";
 import styles from "./Camera.module.css";
 import { cameraKeyboardListener } from "./keyboardListenerEffect";
 import { APP_CONFIG } from "../../app/appConfig";
-import { useMoveMutation, CameraDirection } from "./cameraApiSlice";
+import { useMoveMutation, CameraDirection, useFeedMutation } from "./cameraApiSlice";
 import { FeedButton } from "./FeedButton";
 
-const feed = () => {
-
-}
 
 export const Camera = (): JSX.Element => {
     const [moveCamera] = useMoveMutation();
+    const [feed] = useFeedMutation();
 
     useEffect(() => {
         const unsubscribe = cameraKeyboardListener((e) => {

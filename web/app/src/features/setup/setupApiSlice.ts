@@ -25,14 +25,14 @@ export const setupApiSlice = createApi({
   endpoints: build => ({
     setup: build.mutation<SetupResponse, SetupRequest>({
       query: (request) => ({
-        url: "/setup",
+        url: APP_CONFIG.setupPath,
         method: "POST",
         body: request
       })
     }),
     getSetupStatus: build.query<SetupStatusResponse, void>({
       query: () => ({
-        url: "/setup",
+        url: APP_CONFIG.setupPath,
         method: "GET",
       }),
     }),
