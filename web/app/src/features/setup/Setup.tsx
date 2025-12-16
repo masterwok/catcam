@@ -7,7 +7,7 @@ import { setUsername, setPassword, setNetworkName, setNetworkPassword } from "./
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 
 export const Setup = () => {
-  const [setup, { isLoading, isError }] = useSetupMutation();
+  const [setup, { isLoading }] = useSetupMutation();
   const dispatch = useAppDispatch();
   const state = useAppSelector(state => state.setup)
 
@@ -29,8 +29,8 @@ export const Setup = () => {
     // Fire and forget because network will drop out on successful SSID connection
     setup(state)
 
-    await waitFor("https://ostaracam.maneki.dev")
-    window.location.assign("https://ostaracam.maneki.dev")
+    await waitFor("https://ostara.maneki.dev")
+    window.location.assign("https://ostara.maneki.dev")
   }
 
   return (
