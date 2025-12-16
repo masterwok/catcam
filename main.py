@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse, PlainTextResponse, RedirectResponse
-from routers import auth_router, camera_router, gimbal_router, setup_router
+from routers import auth_router, camera_router, gimbal_router, setup_router, feed_router
 from pathlib import Path
 from network import is_ap_mode, start_captive_portal
 from gpio import init_gpio
@@ -20,6 +20,7 @@ async def root():
 
 app.include_router(auth_router.router)
 app.include_router(camera_router.router)
+app.include_router(feed_router.router)
 app.include_router(gimbal_router.router)
 app.include_router(setup_router.router)
 
