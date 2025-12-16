@@ -6,6 +6,7 @@ from enum import Enum
 from network import connect_ssid, is_ap_mode
 from cmd import run_cmd
 from gpio import led_off
+from auth import write_credentials
 
 
 router = APIRouter(prefix="/api", tags=["setup"])
@@ -19,6 +20,8 @@ class SetupRequest(BaseModel):
 @router.post("/setup")
 async def setup(req: SetupRequest, request: Request):
     await connect_ssid(req.networkName, req.networkPassword)
+
+    write_credentials(req.username, req.password)
 
     led_off(request.app)
 

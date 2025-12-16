@@ -21,10 +21,10 @@ def init_gpio(app, loop: asyncio.AbstractEventLoop) -> None:
     led = LED(LED_GPIO)
 
     async def on_held():
-        if not await is_ap_mode():
-            print("Entering AP mode...")
-            led.blink(on_time=0.5, off_time=0.5, background=True)
-            await start_captive_portal()
+        print("Entering AP mode...")
+        logger.info("Entering AP mode...")
+        led.blink(on_time=0.5, off_time=0.5, background=True)
+        await start_captive_portal()
 
     def on_held_async_delegate():
         fut = asyncio.run_coroutine_threadsafe(on_held(), loop)

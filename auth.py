@@ -62,6 +62,19 @@ def read_credentials(path: str) -> tuple[str, str]:
     username, password_hash = data.split(":", 1)
     return username, password_hash
 
+def write_credentials(username: str, password: str) -> None:
+    """
+    Writes `username:password_hash` to the file.
+    Overwrites any existing contents.
+    """
+    if ":" in username:
+        raise ValueError("Username must not contain ':'")
+
+    password_hash = pwd_context.hash(password)
+
+    with open(CREDS_FILE_PATH, "w", encoding="utf-8") as f:
+        f.write(f"{username}:{password_hash}")
+
 def create_access_token(data: dict, expires_delta: Optional[timedelta] = None) -> str:
     to_encode = data.copy()
     expire = datetime.utcnow() + (expires_delta or timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES))
