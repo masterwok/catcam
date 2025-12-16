@@ -11,6 +11,13 @@
   display: inline-block;
 }
 
+.feedButton {
+  position: absolute;
+  bottom: 30px;
+  right: 30px;
+  z-index: 20;
+}
+
 /* Base styling for all tap zones */
 .tapZone {
   position: absolute;

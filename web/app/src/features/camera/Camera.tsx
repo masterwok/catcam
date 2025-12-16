@@ -3,6 +3,11 @@ import styles from "./Camera.module.css";
 import { cameraKeyboardListener } from "./keyboardListenerEffect";
 import { APP_CONFIG } from "../../app/appConfig";
 import { useMoveMutation, CameraDirection } from "./cameraApiSlice";
+import { FeedButton } from "./FeedButton";
+
+const feed = () => {
+
+}
 
 export const Camera = (): JSX.Element => {
     const [moveCamera] = useMoveMutation();
@@ -35,6 +40,8 @@ export const Camera = (): JSX.Element => {
                 src={APP_CONFIG.streamUrl}
                 alt="Cat camera live stream"
             />
+
+            <FeedButton className={styles.feedButton} onClick={feed} />
 
             <button
                 type="button"

@@ -18,7 +18,8 @@ export const App = () => {
 
   return (
     <div className="App">
-      {content}
+      {/* {content} */}
+      <Camera/>
     </div>
   )
 }

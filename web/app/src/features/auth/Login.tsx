@@ -17,7 +17,7 @@ export const Login = () => {
     <div className="login-page">
       <form className="login-card" onSubmit={onSubmit}>
 
-        <img src={catMascot} alt="cat mascot" className="mascot" />
+        <img src={catMascot} className="mascot" />
 
         <h2 className="title">Ostara Cam</h2>
 
